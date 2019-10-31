@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = (env) => ({
-  entry: './src/playground.js',
+  entry: './src/app.js',
   mode: env,
   output: {
     path: path.join(__dirname, 'public'),
