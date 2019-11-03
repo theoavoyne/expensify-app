@@ -18,6 +18,8 @@
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": "off",
     "react/jsx-one-expression-per-line": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/state-in-constructor": "off"
   }
 }
