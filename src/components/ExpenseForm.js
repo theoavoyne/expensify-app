@@ -7,9 +7,9 @@ export default class ExpenseForm extends React.Component {
     super(props);
     this.state = {
       description: props.expense ? props.expense.description : '',
-      note: props.expense ? props.expense.note : '',
       amount: props.expense ? (props.expense.amount / 100).toString() : '',
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      note: props.expense ? props.expense.note : '',
       error: ''
     };
   }
@@ -17,11 +17,6 @@ export default class ExpenseForm extends React.Component {
   onDescriptionChange = (e) => {
     const description = e.target.value;
     this.setState(() => ({ description }));
-  }
-
-  onNoteChange = (e) => {
-    const note = e.target.value;
-    this.setState(() => ({ note }));
   }
 
   onAmountChange = (e) => {
@@ -37,7 +32,12 @@ export default class ExpenseForm extends React.Component {
     }
   }
 
-  onSubmit = (e) => {
+  onNoteChange = (e) => {
+    const note = e.target.value;
+    this.setState(() => ({ note }));
+  }
+
+  onFormSubmit = (e) => {
     e.preventDefault();
 
     if (!this.state.description || !this.state.amount) {
@@ -57,7 +57,7 @@ export default class ExpenseForm extends React.Component {
     return (
       <div>
         {this.state.error && <p>{this.state.error}</p>}
-        <form action="" onSubmit={this.onSubmit}>
+        <form action="" onSubmit={this.onFormSubmit}>
           <input
             type="text"
             placeholder="Description"

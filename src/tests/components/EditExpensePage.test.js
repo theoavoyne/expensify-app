@@ -23,17 +23,17 @@ beforeEach(() => {
   );
 });
 
-test('Should render EditExpensePage', () => {
+test('Should render EditExpensePage correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('Should handle editExpense', () => {
+test('Should handle onFormSubmit', () => {
   wrapper.find('ExpenseForm').prop('onSubmit')(expenses[2]);
   expect(history.push).toHaveBeenLastCalledWith('/');
-  expect(editExpense).toHaveBeenLastCalledWith(expenses[2]);
+  expect(editExpense).toHaveBeenLastCalledWith(expenses[2].id, expenses[2]);
 });
 
-test('Should handle removeExpense', () => {
+test('Should handle onButtonClick', () => {
   wrapper.find('button').simulate('click');
   expect(history.push).toHaveBeenLastCalledWith('/');
   expect(removeExpense).toHaveBeenCalled();

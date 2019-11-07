@@ -1,6 +1,6 @@
 import { addExpense, editExpense, removeExpense } from '../../actions/expenses';
 
-test('Should setup add expense action object with provided values', () => {
+test('Should setup ADD_EXPENSE action object with data correctly', () => {
   const expenseData = {
     description: 'Rent',
     amount: 109500,
@@ -17,7 +17,7 @@ test('Should setup add expense action object with provided values', () => {
   });
 });
 
-test('Should setup add expense action object with default values', () => {
+test('Should setup ADD_EXPENSE action object with default correctly', () => {
   const action = addExpense({});
   expect(action).toEqual({
     type: 'ADD_EXPENSE',
@@ -31,7 +31,7 @@ test('Should setup add expense action object with default values', () => {
   });
 });
 
-test('Should setup remove expense action object', () => {
+test('Should setup REMOVE_EXPENSE action object correctly', () => {
   const action = removeExpense({ id: '123abc' });
   expect(action).toEqual({
     type: 'REMOVE_EXPENSE',
@@ -39,7 +39,7 @@ test('Should setup remove expense action object', () => {
   });
 });
 
-test('Should setup edit expense action object', () => {
+test('Should setup EDIT_EXPENSE action object correctly', () => {
   const action = editExpense('123abc', { note: 'new note value' });
   expect(action).toEqual({
     type: 'EDIT_EXPENSE',

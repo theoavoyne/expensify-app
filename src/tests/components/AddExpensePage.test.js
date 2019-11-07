@@ -11,14 +11,19 @@ let wrapper;
 beforeEach(() => {
   addExpense = jest.fn();
   history = { push: jest.fn() };
-  wrapper = shallow(<AddExpensePage addExpense={addExpense} history={history} />);
+  wrapper = shallow(
+    <AddExpensePage
+      addExpense={addExpense}
+      history={history}
+    />
+  );
 });
 
 test('Should render AddExpensePage correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('Should handle onSubmit', () => {
+test('Should handle onFormSubmit', () => {
   wrapper.find('ExpenseForm').prop('onSubmit')(expenses[1]);
   expect(history.push).toHaveBeenLastCalledWith('/');
   expect(addExpense).toHaveBeenLastCalledWith(expenses[1]);

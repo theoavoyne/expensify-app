@@ -34,12 +34,12 @@ test('Should render ExpenseListFilters correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('Should render ExpenseListFilters with alt data correctly', () => {
+test('Should render ExpenseListFilters with alternative data correctly', () => {
   wrapper.setProps({ filters: altFilters });
   expect(wrapper).toMatchSnapshot();
 });
 
-test('Should handle text change', () => {
+test('Should handle onTextChange', () => {
   const value = 'rent';
   wrapper.find('input').simulate('change', {
     target: { value }
@@ -47,7 +47,7 @@ test('Should handle text change', () => {
   expect(setTextFilter).toHaveBeenLastCalledWith(value);
 });
 
-test('Should sort by date', () => {
+test('Should handle onSortChange (date)', () => {
   const value = 'date';
   wrapper.setProps({ filters: altFilters });
   wrapper.find('select').simulate('change', {
@@ -56,7 +56,7 @@ test('Should sort by date', () => {
   expect(sortByDate).toHaveBeenCalled();
 });
 
-test('Should sort by amount', () => {
+test('Should handle onSortChange (amount)', () => {
   const value = 'amount';
   wrapper.find('select').simulate('change', {
     target: { value }
@@ -64,7 +64,7 @@ test('Should sort by amount', () => {
   expect(sortByAmount).toHaveBeenCalled();
 });
 
-test('Should handle date changes', () => {
+test('Should handle onStartDateChange and onEndDateChange', () => {
   const startDate = moment(1000);
   const endDate = moment(2000);
   wrapper.find('t').at(0).prop('onChange')(startDate.valueOf());
