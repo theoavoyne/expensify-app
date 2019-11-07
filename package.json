@@ -7,7 +7,8 @@
   "scripts": {
     "build:dev": "webpack --env development",
     "build:prod": "webpack --env production",
-    "dev-server": "webpack-dev-server"
+    "dev-server": "webpack-dev-server",
+    "test": "jest --config=jest.config.json"
   },
   "dependencies": {
     "@babel/core": "^7.6.4",
@@ -27,18 +28,25 @@
     "redux": "^4.0.4",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
-    "uuid": "3.1.0",
+    "uuid": "^3.3.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.9.0",
+    "raf": "^3.4.1",
+    "typescript": "^3.7.2",
     "webpack-dev-server": "^3.9.0"
   }
 }
