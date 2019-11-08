@@ -7,7 +7,9 @@
   "scripts": {
     "build:dev": "webpack --env development",
     "build:prod": "webpack --env production",
-    "dev-server": "webpack-dev-server",
+    "dev-server": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon -e js,json server.js",
+    "heroku-postbuild": "yarn run build:prod",
+    "start": "node server.js",
     "test": "jest --config=jest.config.json"
   },
   "dependencies": {
@@ -17,9 +19,12 @@
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.8.0",
     "moment": "^2.24.0",
+    "morgan": "^1.9.1",
     "node-sass": "^4.13.0",
     "normalize.css": "^8.0.1",
     "react": "^16.11.0",
@@ -32,7 +37,8 @@
     "style-loader": "^1.0.0",
     "uuid": "^3.3.3",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-middleware": "^3.7.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
