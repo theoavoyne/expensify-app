@@ -9,7 +9,7 @@ test('Should render ExpenseList with expenses correctly', () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test('Should render ExpenseList with empty expenses correctly', () => {
+test('Should render ExpenseList with no expenses correctly', () => {
   const wrapper = shallow(<ExpenseList expenses={[]} />);
   expect(wrapper).toMatchSnapshot();
 });
