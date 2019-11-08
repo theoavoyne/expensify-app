@@ -5,11 +5,11 @@ const helmet = require('helmet');
 const logger = require('morgan');
 const path = require('path');
 
-const publicPath = path.join(__dirname, 'public');
-
 require('./config/config');
 
 const app = express();
+
+const publicPath = path.join(__dirname, 'public');
 
 // WEBPACK DEV MIDDLEWARE
 const { webpackDev } = require('./middlewares/webpackDev');
