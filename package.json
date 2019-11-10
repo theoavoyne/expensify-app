@@ -7,10 +7,10 @@
   "scripts": {
     "build:dev": "webpack --env development",
     "build:prod": "webpack --env production",
-    "dev-server": "export NODE_ENV=development || SET \"NODE_ENV=development\" && nodemon -e js,json server.js",
+    "dev-server": "cross-env NODE_ENV=development nodemon -e js,json server.js",
     "heroku-postbuild": "yarn run build:prod",
     "start": "node server.js",
-    "test": "jest --config=jest.config.json"
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json"
   },
   "dependencies": {
     "@babel/core": "^7.6.4",
@@ -18,8 +18,10 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
+    "cross-env": "^6.0.3",
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
+    "firebase": "^7.3.0",
     "helmet": "^3.21.2",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.8.0",
@@ -34,9 +36,9 @@
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
-    "uuid": "^3.3.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-middleware": "^3.7.2"
@@ -54,6 +56,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "^24.9.0",
+    "redux-mock-store": "^1.5.3",
     "typescript": "^3.7.2"
   }
 }
