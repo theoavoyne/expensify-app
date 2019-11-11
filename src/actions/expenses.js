@@ -1,5 +1,7 @@
 import database from '../firebase/firebase';
 
+// ADD EXPENSE
+
 export const addExpense = (expense) => ({
   type: 'ADD_EXPENSE',
   expense
@@ -7,18 +9,13 @@ export const addExpense = (expense) => ({
 
 export const startAddExpense = (expenseData = {}) => (
   (dispatch) => {
-    const {
-      description = '',
-      note = '',
-      amount = 0,
-      createdAt = 0
-    } = expenseData;
     const expense = {
-      description,
-      note,
-      amount,
-      createdAt
+      description: expenseData.description || '',
+      note: expenseData.note || '',
+      amount: expenseData.amount || 0,
+      createdAt: expenseData.createdAt || 0
     };
+
     return database
       .ref('expenses')
       .push(expense)
@@ -31,13 +28,42 @@ export const startAddExpense = (expenseData = {}) => (
   }
 );
 
+// REMOVE EXPENSE
+
 export const removeExpense = ({ id } = {}) => ({
   type: 'REMOVE_EXPENSE',
   id
 });
+
+// EDIT EXPENSE
 
 export const editExpense = (id, updates) => ({
   type: 'EDIT_EXPENSE',
   id,
   updates
 });
+
+// SET EXPENSES
+
+export const setExpenses = (expenses) => ({
+  type: 'SET_EXPENSES',
+  expenses
+});
+
+export const startSetExpenses = () => (
+  (dispatch) => (
+    database
+      .ref('expenses')
+      .once('value')
+      .then((snapshot) => {
+        const expensesObj = snapshot.val() || {};
+
+        const expenses = Object.keys(expensesObj).map((key) => ({
+          id: key,
+          ...expensesObj[key]
+        }));
+
+        dispatch(setExpenses(expenses));
+      })
+  )
+);

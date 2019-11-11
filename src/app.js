@@ -8,14 +8,11 @@ import { Provider } from 'react-redux';
 
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
 import './firebase/firebase';
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: 'Water Bill', amount: 4500 }));
-store.dispatch(addExpense({ description: 'Gas Bill', createdAt: 10000 }));
-store.dispatch(addExpense({ description: 'Rent', amount: 109500 }));
 
 const jsx = (
   <Provider store={store}>
@@ -23,4 +20,8 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});
