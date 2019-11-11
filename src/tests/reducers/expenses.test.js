@@ -1,12 +1,16 @@
 import expensesReducer from '../../reducers/expenses';
 import expenses from '../fixtures/expenses';
 
-test('Should setup default expenses values', () => {
+// INIT
+
+test('@@INIT should setup default expenses values', () => {
   const state = expensesReducer(undefined, { type: '@@INIT' });
   expect(state).toEqual([]);
 });
 
-test('Should remove expense by id', () => {
+// REMOVE EXPENSE
+
+test('REMOVE_EXPENSE should remove expense by id', () => {
   const action = {
     type: 'REMOVE_EXPENSE',
     id: expenses[1].id
@@ -15,7 +19,7 @@ test('Should remove expense by id', () => {
   expect(state).toEqual([expenses[0], expenses[2]]);
 });
 
-test('Should not remove expense if id not found', () => {
+test('REMOVE_EXPENSE should not remove expense if id not found', () => {
   const action = {
     type: 'REMOVE_EXPENSE',
     id: -1
@@ -24,7 +28,9 @@ test('Should not remove expense if id not found', () => {
   expect(state).toEqual(expenses);
 });
 
-test('Should add an expense', () => {
+// ADD EXPENSE
+
+test('ADD_EXPENSE should add an expense', () => {
   const expense = {
     id: 4,
     description: 'Laptop',
@@ -40,7 +46,9 @@ test('Should add an expense', () => {
   expect(state).toEqual([...expenses, expense]);
 });
 
-test('Should edit an expense', () => {
+// EDIT EXPENSE
+
+test('EDIT_EXPENSE should edit an expense', () => {
   const amount = 122000;
   const action = {
     type: 'EDIT_EXPENSE',
@@ -53,7 +61,7 @@ test('Should edit an expense', () => {
   expect(state[1].amount).toBe(amount);
 });
 
-test('Should not edit an expense if expense not found', () => {
+test('EDIT_EXPENSE should not edit an expense if id not found', () => {
   const amount = 122000;
   const action = {
     type: 'EDIT_EXPENSE',
@@ -66,7 +74,9 @@ test('Should not edit an expense if expense not found', () => {
   expect(state).toEqual(expenses);
 });
 
-test('Should set expenses', () => {
+// SET EXPENSES
+
+test('SET_EXPENSES should set expenses', () => {
   const action = {
     type: 'SET_EXPENSES',
     expenses: [expenses[1]]
