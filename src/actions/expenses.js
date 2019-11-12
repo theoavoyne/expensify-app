@@ -8,7 +8,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => (
-  (dispatch) => {
+  (dispatch, getState) => {
+    const { uid } = getState().auth;
     const expense = {
       description: expenseData.description || '',
       note: expenseData.note || '',
@@ -17,7 +18,7 @@ export const startAddExpense = (expenseData = {}) => (
     };
 
     return database
-      .ref('expenses')
+      .ref(`users/${uid}/expenses`)
       .push(expense)
       .then((ref) => {
         dispatch(addExpense({
@@ -36,12 +37,15 @@ export const removeExpense = (id) => ({
 });
 
 export const startRemoveExpense = (id) => (
-  (dispatch) => (
-    database
-      .ref(`expenses/${id}`)
-      .remove()
-      .then(dispatch(removeExpense(id)))
-  )
+  (dispatch, getState) => {
+    const { uid } = getState().auth;
+    return (
+      database
+        .ref(`users/${uid}/expenses/${id}`)
+        .remove()
+        .then(dispatch(removeExpense(id)))
+    );
+  }
 );
 
 // EDIT EXPENSE
@@ -53,12 +57,15 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => (
-  (dispatch) => (
-    database
-      .ref(`expenses/${id}`)
-      .update(updates)
-      .then(dispatch(editExpense(id, updates)))
-  )
+  (dispatch, getState) => {
+    const { uid } = getState().auth;
+    return (
+      database
+        .ref(`users/${uid}/expenses/${id}`)
+        .update(updates)
+        .then(dispatch(editExpense(id, updates)))
+    );
+  }
 );
 
 // SET EXPENSES
@@ -69,19 +76,22 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => (
-  (dispatch) => (
-    database
-      .ref('expenses')
-      .once('value')
-      .then((snapshot) => {
-        const expensesObj = snapshot.val() || {};
+  (dispatch, getState) => {
+    const { uid } = getState().auth;
+    return (
+      database
+        .ref(`users/${uid}/expenses`)
+        .once('value')
+        .then((snapshot) => {
+          const expensesObj = snapshot.val() || {};
 
-        const expenses = Object.keys(expensesObj).map((key) => ({
-          id: key,
-          ...expensesObj[key]
-        }));
+          const expenses = Object.keys(expensesObj).map((key) => ({
+            id: key,
+            ...expensesObj[key]
+          }));
 
-        dispatch(setExpenses(expenses));
-      })
-  )
+          dispatch(setExpenses(expenses));
+        })
+    );
+  }
 );
