@@ -9,7 +9,7 @@ module.exports = (env) => {
   });
 
   return {
-    entry: './src/app.js',
+    entry: ['babel-polyfill', './src/app.js'],
     mode: env,
     output: {
       path: path.join(__dirname, 'public', 'dist'),

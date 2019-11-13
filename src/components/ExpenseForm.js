@@ -55,33 +55,41 @@ export default class ExpenseForm extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form action="" onSubmit={this.onFormSubmit}>
-          <input
-            type="text"
-            placeholder="Description"
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-          />
-          <input
-            type="text"
-            placeholder="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-          />
-          <DatePicker
-            selected={this.state.createdAt.toDate()}
-            onChange={this.onDateChange}
-          />
-          <textarea
-            placeholder="Add a note for your expense (optional)"
-            value={this.state.note}
-            onChange={this.onNoteChange}
-          />
-          <button type="submit">Add Expense</button>
-        </form>
-      </div>
+      <form
+        action=""
+        onSubmit={this.onFormSubmit}
+        className="form"
+      >
+        {this.state.error && <p className="form__error">{this.state.error}</p>}
+        <input
+          type="text"
+          placeholder="Description"
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+          className="text-input"
+        />
+        <input
+          type="text"
+          placeholder="Amount"
+          value={this.state.amount}
+          onChange={this.onAmountChange}
+          className="text-input"
+        />
+        <DatePicker
+          selected={this.state.createdAt.toDate()}
+          onChange={this.onDateChange}
+          className="datepicker"
+        />
+        <textarea
+          placeholder="Add a note for your expense (optional)"
+          value={this.state.note}
+          onChange={this.onNoteChange}
+          className="textarea"
+        />
+        <div>
+          <button type="submit" className="button">Save Expense</button>
+        </div>
+      </form>
     );
   }
 }
